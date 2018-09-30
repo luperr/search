@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
-//Find occanrace of the key word in a file
+//Does the file contain the key word?
 int contains(char* test, char* fileName){
     FILE *file = fopen(fileName, "r");
     int x = 0;
@@ -27,22 +28,19 @@ int contains(char* test, char* fileName){
 
 int main(int argc, char *argv[]){
     char *keyword = argv[1];
-
-
-    for(int i=0; i < (argc - 1); i++){
-        int z = contains(keyword, argv[i + 2]);
-        printf("the return value is %d\n", z);
-
-    }
-    //Declaring all the varibles
-    //What is pid_t????
-   /*
-    int x, status;
+    int status, x;
     pid_t child;
-    x = 0;
-    child = fork();
 
-    //While??
+    if(argc == 1){
+        printf("No arguments entered: please enter a keyword first followed by the files you want to search\n");
+        exit(0);
+    } else if(argc == 2){
+        printf("No files selected: Please enter the files to search after the keyword\n");
+        exit(0);
+    }
+    
+    for(int i=2; i < argc ; i++){
+    child = fork();
     if(child){
         //Do the parent stuff
         if(-1 == wait(&status)){
@@ -50,17 +48,17 @@ int main(int argc, char *argv[]){
             printf("No child process to wait for\n");
         } else if(WIFEXITED(status)){
             //handle exit statuses here with WEXITSTATUS(status);
-            printf("Child exit status\n"); 
         } else {
             //sweet sweet edge case of thread fuckerery
             printf("shit got fucked\n");
         }
     } else {
-        //Do the child stuff
-        printf("here is the child process running\n");
+        int z = contains(keyword, argv[i]);
+        if(z > 0 && z < 255){
+            printf("%s\n", argv[i]);
+        }
+        exit(0);
+        }
     }
-    */
-    printf("shit son it all worked!\n");
-
     return 0;
 }
