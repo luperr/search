@@ -5,26 +5,35 @@
 #include <unistd.h>
 
 //Find occanrace of the key word in a file
-int numMatches(char* test, FILE *file){
+int contains(char* test, char* fileName){
+    FILE *file = fopen(fileName, "r");
     int x = 0;
     char buffer[1024];
-    while(fgets(buffer, 1024, file) != NULL){
-        if(strstr(buffer, test) != NULL){
-            x++;
+    if(file){
+        while(fgets(buffer, 1024, file) != NULL){
+            if(strstr(buffer, test) != NULL){
+                x++;
+            }
         }
+    } else {
+        x = 255;
     }
-    if(x > 255)
+    fclose(file);
+    if(x > 255 || x < 0)
         return 255;
     else
         return x;
 }
 
 int main(int argc, char *argv[]){
+    char *keyword = argv[1];
 
-    FILE *file = fopen("file0.txt", "r");
 
+    for(int i=0; i < (argc - 1); i++){
+        int z = contains(keyword, argv[i + 2]);
+        printf("the return value is %d\n", z);
 
-    fclose(file);
+    }
     //Declaring all the varibles
     //What is pid_t????
    /*
