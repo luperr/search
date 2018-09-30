@@ -7,6 +7,7 @@ after instillation run this command from searches directory with your desired ar
 ### Installation
 
 Clone the project form github:
+
 `git clone https://github.com/luperr/search.git`
 
 Navigate to the directory:
