@@ -11,10 +11,13 @@ Clone the project form github:
 `git clone https://github.com/luperr/search.git`
 
 Navigate to the directory:
+
 `cd /search`
 
 Make the run.sh script executable:
+
 `chmod +x run.sh`
 
 Run the build script with your arguments (as above):
+
 `./run.sh {keyword} {file_1} {file_2} ... {file_n}`
