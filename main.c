@@ -1,11 +1,33 @@
 #include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
-int main(){
+//Find occanrace of the key word in a file
+int numMatches(char* test, FILE *file){
+    int x = 0;
+    char buffer[1024];
+    while(fgets(buffer, 1024, file) != NULL){
+        if(strstr(buffer, test) != NULL){
+            x++;
+        }
+    }
+    if(x > 255)
+        return 255;
+    else
+        return x;
+}
+
+int main(int argc, char *argv[]){
+
+    FILE *file = fopen("file0.txt", "r");
+
+
+    fclose(file);
     //Declaring all the varibles
     //What is pid_t????
+   /*
     int x, status;
     pid_t child;
     x = 0;
@@ -28,7 +50,7 @@ int main(){
         //Do the child stuff
         printf("here is the child process running\n");
     }
-
+    */
     printf("shit son it all worked!\n");
 
     return 0;
