@@ -42,15 +42,11 @@ int main(int argc, char *argv[]){
     for(int i=2; i < argc ; i++){
     child = fork();
     if(child){
-        //Do the parent stuff
         if(-1 == wait(&status)){
-            //do the thing after all the child processes are done
             printf("No child process to wait for\n");
-        } else if(WIFEXITED(status)){
-            //handle exit statuses here with WEXITSTATUS(status);
         } else {
-            //sweet sweet edge case of thread fuckerery
-            printf("shit got fucked\n");
+            printf("An error has occured try again.\n");
+            exit(0);
         }
     } else {
         int z = contains(keyword, argv[i]);
